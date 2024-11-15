@@ -116,9 +116,9 @@ public class HuffmanCodingService {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         ResponseEntity<Resource> response = ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + compressedFile + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + compressedFile)
                 .contentLength(compressedFile.length())
-                .contentType(MediaType.TEXT_PLAIN)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(new InputStreamResource(Files.newInputStream(compressedFile.toPath())));
         compressedFile.delete();
         return response;
@@ -173,7 +173,7 @@ public class HuffmanCodingService {
         ResponseEntity<Resource> response = ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + decompressedFile + "\"")
                 .contentLength(decompressedFile.length())
-                .contentType(MediaType.TEXT_PLAIN)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(new InputStreamResource(Files.newInputStream(decompressedFile.toPath())));
         decompressedFile.delete();
         return response;
